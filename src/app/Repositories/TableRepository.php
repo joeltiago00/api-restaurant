@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Core\Interfaces\TableInterface;
 use App\Exceptions\General\NothingToUpdate;
+use App\Exceptions\Table\TableNotDeleted;
 use App\Exceptions\Table\TableNotStored;
 use App\Exceptions\Table\TableNotUpdated;
 use App\Models\Table;
@@ -66,10 +67,15 @@ class TableRepository extends Repository
     /**
      * @param Table $table
      * @return bool
+     * @throws TableNotDeleted
      */
     public function delete(Table $table): bool
     {
-        return $table->delete();
+        try {
+            return (bool)$table->delete();
+        } catch (\Exception $e) {
+            throw new TableNotDeleted($e);
+        }
     }
 
     /**

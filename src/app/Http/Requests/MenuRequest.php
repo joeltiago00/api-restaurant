@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TableRequest extends FormRequest
+class MenuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,16 +38,15 @@ class TableRequest extends FormRequest
     private function validationStore(): array
     {
         return [
-            'number' => 'required|numeric|min:1',
-            'quantity_seats' => 'required|numeric|min:1',
+            'name' => 'required|string|min:3',
         ];
     }
 
     private function validationUpdate(): array
     {
         return [
-            'number' => 'sometimes|numeric|min:1',
-            'quantity_seats' => 'sometimes|numeric|min:1',
+            'name' => 'sometimes|string|min:3',
+
         ];
     }
 }

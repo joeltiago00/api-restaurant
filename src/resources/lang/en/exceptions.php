@@ -24,6 +24,13 @@ return [
             'not-found' => 'Item menu not found.',
         ],
         'not-found' => 'Menu not found.',
+        'not-stored' => 'Menu not stored. Error code: :error_code.',
+        'not-created' => 'Menu not created.',
+        'not-updated' => 'Menu not updated. Error code: :error_code',
+        'not-changed' => 'Menu not changed.',
+        'not-geted' => 'Menu not geted.',
+        'not-deleted' => 'Menu not deleted. Error code: :error_code.',
+        'not-excluded' => 'Menu not excluded.',
     ],
 
     'request-order' => [
@@ -59,7 +66,8 @@ return [
         'not-stored' => 'Table not stored. Error code: :error_code.',
         'not-created' => 'Table not created.',
         'not-geted' => 'Tables not geted.',
-        'not-deleted' => 'Table not deleted.',
+        'not-deleted' => 'Table not deleted. Error code: : error_code.',
+        'not-excluded' => 'Table not excluded.',
     ],
 
     'general' => [

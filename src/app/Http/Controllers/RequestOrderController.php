@@ -65,7 +65,7 @@ class RequestOrderController extends Controller
     {
         $menus = (new MenuRepository())->getAllWithItems()->toArray();
 
-        return  ResponseHelper::results(['menus' => (new MenuTransformer())->index($menus)]);
+        return  ResponseHelper::results(['menus' => (new MenuTransformer())->list($menus)]);
     }
 
     /**

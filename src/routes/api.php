@@ -3,10 +3,11 @@
 use App\Http\Controllers\{Auth\LoginController,
     CookerController,
     CostumerController,
+    MenuController,
     RequestOrderController,
+    TableController,
     UserController,
-    WaiterController
-};
+    WaiterController};
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
@@ -59,9 +60,38 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Admin Routes
-    Route::group(['prefix' => 'user', 'middleware' => 'admin'], function () {
-        Route::get('create', [UserController::class, 'create']);
-        Route::post('', [UserController::class, 'store']);
+    Route::middleware('admin')->group(function () {
+        //User
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('create', [UserController::class, 'create']);
+            Route::post('', [UserController::class, 'store']);
+        });
+
+        //Menu
+        Route::group(['prefix' => 'menu'], function () {
+            Route::post('', [MenuController::class, 'store']);
+            Route::get('', [MenuController::class, 'index']);
+
+            Route::group(['prefix' => '{menu}'], function () {
+                Route::patch('', [MenuController::class, 'update']);
+                Route::get('', [MenuController::class, 'show']);
+                Route::delete('', [MenuController::class, 'delete']);
+            });
+        });
+
+        //Table
+        Route::group(['prefix' => 'table'], function () {
+            Route::post('', [TableController::class, 'store']);
+            Route::get('', [TableController::class, 'index']);
+
+            Route::group(['prefix' => '{table}'], function () {
+                Route::patch('', [TableController::class, 'update']);
+                Route::get('', [TableController::class, 'show']);
+                Route::delete('', [TableController::class, 'delete']);
+            });
+        });
+
     });
+
 });
 

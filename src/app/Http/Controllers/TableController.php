@@ -8,6 +8,7 @@ use App\Types\PaginationValueTypes;
 use App\Exceptions\Table\{TableNotChanged,
     TableNotCreated,
     TableNotDeleted,
+    TableNotExcluded,
     TableNotGeted,
     TableNotStored,
     TableNotUpdated};
@@ -90,11 +91,12 @@ class TableController extends Controller
      * @param Table $table
      * @return JsonResponse
      * @throws TableNotDeleted
+     * @throws TableNotExcluded
      */
     public function delete(Table $table): JsonResponse
     {
         if (!$this->repository->delete($table))
-            throw new TableNotDeleted();
+            throw new TableNotExcluded();
 
         return ResponseHelper::noContent();
     }
