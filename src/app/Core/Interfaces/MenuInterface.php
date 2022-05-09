@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Interfaces\Menu;
+namespace App\Core\Interfaces;
 
 interface MenuInterface
 {

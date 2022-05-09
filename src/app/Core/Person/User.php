@@ -4,7 +4,7 @@ namespace App\Core\Person;
 
 use App\Core\Interfaces\DocumentInterface;
 use App\Core\Interfaces\LoginInterface;
-use App\Core\Interfaces\Person\UserInterface;
+use App\Core\Interfaces\UserInterface;
 
 class User implements UserInterface
 {

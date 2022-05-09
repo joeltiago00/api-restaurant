@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Core\Interfaces\Person\CostumerInterface;
+use App\Core\Interfaces\CostumerInterface;
 use App\Exceptions\Costumer\CostumerNotStored;
 use App\Models\Costumer;
 

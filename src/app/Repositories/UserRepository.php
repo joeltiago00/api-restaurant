@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Core\Interfaces\Person\UserInterface;
+use App\Core\Interfaces\UserInterface;
 use App\Exceptions\JobFunction\JobFunctionNotFound;
 use App\Exceptions\Role\RoleNotFound;
 use App\Exceptions\User\UserNotStored;

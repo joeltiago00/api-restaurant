@@ -56,5 +56,13 @@ return [
 
     'table' => [
         'not-found' => 'Table not found.',
+        'not-stored' => 'Table not stored. Error code: :error_code.',
+        'not-created' => 'Table not created.',
+        'not-geted' => 'Tables not geted.',
+        'not-deleted' => 'Table not deleted.',
+    ],
+
+    'general' => [
+        'nothing-to-update' => 'Nothing to update.',
     ]
 ];

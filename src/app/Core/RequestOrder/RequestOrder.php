@@ -2,8 +2,7 @@
 
 namespace App\Core\RequestOrder;
 
-use App\Core\Interfaces\RequestOrder\RequestOrderInterface;
-use Carbon\Carbon;
+use App\Core\Interfaces\RequestOrderInterface;
 
 class RequestOrder implements RequestOrderInterface
 {

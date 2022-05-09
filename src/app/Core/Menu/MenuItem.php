@@ -2,8 +2,8 @@
 
 namespace App\Core\Menu;
 
-use App\Core\Interfaces\Menu\MenuInterface;
-use App\Core\Interfaces\Menu\MenuItemInterface;
+use App\Core\Interfaces\MenuInterface;
+use App\Core\Interfaces\MenuItemInterface;
 
 class MenuItem implements MenuItemInterface
 {

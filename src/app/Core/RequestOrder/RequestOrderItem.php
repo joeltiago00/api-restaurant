@@ -2,7 +2,7 @@
 
 namespace App\Core\RequestOrder;
 
-use App\Core\Interfaces\RequestOrder\RequestOrderItemInterface;
+use App\Core\Interfaces\RequestOrderItemInterface;
 
 class RequestOrderItem implements RequestOrderItemInterface
 {

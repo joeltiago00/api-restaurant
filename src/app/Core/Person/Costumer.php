@@ -2,8 +2,8 @@
 
 namespace App\Core\Person;
 
+use App\Core\Interfaces\CostumerInterface;
 use App\Core\Interfaces\DocumentInterface;
-use App\Core\Interfaces\Person\CostumerInterface;
 
 class Costumer implements  CostumerInterface
 {

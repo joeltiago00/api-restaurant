@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Interfaces\RequestOrder;
+namespace App\Core\Interfaces;
 
 interface RequestOrderItemInterface
 {

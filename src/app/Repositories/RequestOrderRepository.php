@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Core\Interfaces\RequestOrder\RequestOrderInterface;
+use App\Core\Interfaces\RequestOrderInterface;
 use App\Exceptions\Access\NotAllowed;
-use App\Exceptions\RequestOrder\{RequestOrderNotStored,
+use App\Exceptions\RequestOrder\{RequestOrderNotGeted,
+    RequestOrderNotStored,
     RequestOrderNotUpdated,
-    RequestOrderNotGeted,
     RequestOrderPriceNotUpdated};
 use App\Exceptions\Table\TableNotFound;
 use App\Models\RequestOrder;

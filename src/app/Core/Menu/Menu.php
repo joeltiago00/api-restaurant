@@ -2,7 +2,7 @@
 
 namespace App\Core\Menu;
 
-use App\Core\Interfaces\Menu\MenuInterface;
+use App\Core\Interfaces\MenuInterface;
 
 class Menu implements MenuInterface
 {

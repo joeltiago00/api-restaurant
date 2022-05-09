@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Core\Interfaces\RequestOrder;
-
-use Carbon\Carbon;
+namespace App\Core\Interfaces;
 
 interface RequestOrderInterface
 {

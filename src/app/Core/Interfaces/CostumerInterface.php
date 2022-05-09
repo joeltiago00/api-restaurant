@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Interfaces\Person;
+namespace App\Core\Interfaces;
 
 interface CostumerInterface
 {
