@@ -2,40 +2,49 @@
 
 ##
 
-# translator-api
-This project consists of applying translations in text, being able to convert the same to .json and .php files using a system between key and value to be used in translations of other applications.
+# Construindo container 🐋 && Configurando aplicação
 
-# Build and configure Docker 🐋
-
-To build docker container you need open terminal on folder of your application and execute this command:
+Para construir o container acesse o terminal de sua aplicação e execute:
 
 ```
 docker-compose up -d --build
 ```
 
-After the construction of the container is finished, it is necessary to install composer and for that we need to enter the container. Run:
+Depois que o procedimento acabar certifique-se de que o container da api está on e execute:
 
 ```
 docker-compose exec app bash
 ```
 
-After that we need install composer. Make sure you are inside the container and run:
+Após isso verifique se você está dentro do container e execute:
 
 ```
 composer install
 ```
 
-Build and confiration done. 👌
+Crie as tabelas no banco de dados:
 
-If you need enter in container with root just run:
+```
+php artisan migrate
+```
+
+E finalmente popule o banco de dados utilizando:
+
+```
+php artisan db:seed
+```
+
+Container OK, configuração OK. 👌
+
+Se precisar entrar no container como root use:
 
 ```
 docker-compose exec -uroot app bash
 ```
 
-# Testing application
+# Testando API
 
-To make sure application is on go to url:
+Para ter certeza que a API está online acesse url:
 
 ```
 localhost:9050/api/
