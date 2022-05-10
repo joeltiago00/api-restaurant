@@ -3,12 +3,13 @@
 namespace App\Repositories;
 
 use App\Core\Interfaces\MenuInterface;
-use App\Exceptions\Menu\MenuNotDeleted;
-use App\Exceptions\Menu\MenuNotStored;
-use App\Exceptions\Menu\MenuNotUpdated;
+use App\Exceptions\Menu\{
+    MenuNotDeleted,
+    MenuNotStored,
+    MenuNotUpdated,
+};
 use App\Models\Menu;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
 
 class MenuRepository extends Repository
 {

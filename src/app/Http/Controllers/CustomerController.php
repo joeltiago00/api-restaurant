@@ -16,7 +16,6 @@ use App\Http\Requests\CostumerRequest;
 use App\Models\Customer;
 use App\Transformers\{
     CustomerTransformer,
-    UserTransformer,
 };
 use App\Repositories\{
     CustomerRepository,

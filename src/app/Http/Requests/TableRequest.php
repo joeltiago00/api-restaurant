@@ -35,6 +35,9 @@ class TableRequest extends FormRequest
             return $this->validationIndex();
     }
 
+    /**
+     * @return array
+     */
     private function validationStore(): array
     {
         return [
@@ -43,6 +46,9 @@ class TableRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     private function validationUpdate(): array
     {
         return [

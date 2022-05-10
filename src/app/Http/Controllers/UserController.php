@@ -8,12 +8,14 @@ use App\Core\Person\User;
 use App\Exceptions\General\NothingToUpdate;
 use App\Exceptions\JobFunction\JobFunctionNotFound;
 use App\Exceptions\Role\RoleNotFound;
-use App\Exceptions\User\UserNotChanged;
-use App\Exceptions\User\UserNotDeleted;
-use App\Exceptions\User\UserNotExcluded;
-use App\Exceptions\User\UserNotListed;
-use App\Exceptions\User\UserNotStored;
-use App\Exceptions\User\UserNotUpdated;
+use App\Exceptions\User\{
+    UserNotChanged,
+    UserNotDeleted,
+    UserNotExcluded,
+    UserNotListed,
+    UserNotStored,
+    UserNotUpdated,
+};
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\UserRequest;
 use App\Repositories\JobFunctionRepository;

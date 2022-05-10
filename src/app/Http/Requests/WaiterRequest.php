@@ -29,6 +29,9 @@ class WaiterRequest extends FormRequest
             return $this->validationGetRequestOrdersByWaiter();
     }
 
+    /**
+     * @return array
+     */
     private function validationGetRequestOrdersByWaiter(): array
     {
         return [

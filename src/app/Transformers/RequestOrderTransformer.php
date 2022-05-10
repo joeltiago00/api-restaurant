@@ -24,6 +24,7 @@ class RequestOrderTransformer
             $table = isset($order['table']) ? $this->setTable($order['table']) : [];
             $cooker = isset($order['cooker']) ? $this->setCooker($order['cooker']) : [];
             $waiter = isset($order['waiter']) ? $this->setWaiter($order['waiter']) : [];
+
             $response['request_orders'][] = $this->applyFormat($order, $items, $waiter, $cooker, $customer, $table);
         }
 

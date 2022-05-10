@@ -35,12 +35,19 @@ class MenuRequest extends FormRequest
             return $this->validationIndex();
     }
 
+    /**
+     * @return array
+     */
     private function validationStore(): array
     {
         return [
             'name' => 'required|string|min:3',
         ];
     }
+
+    /**
+     * @return array
+     */
     private function validationIndex(): array
     {
         return [
@@ -48,6 +55,9 @@ class MenuRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     private function validationUpdate(): array
     {
         return [

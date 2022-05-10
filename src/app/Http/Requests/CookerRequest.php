@@ -29,6 +29,9 @@ class CookerRequest extends FormRequest
             return $this->validationGetRequestOrdersByCooker();
     }
 
+    /**
+     * @return array
+     */
     private function validationGetRequestOrdersByCooker(): array
     {
         return [

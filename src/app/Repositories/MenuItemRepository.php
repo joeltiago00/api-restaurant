@@ -4,10 +4,12 @@ namespace App\Repositories;
 
 use App\Core\Interfaces\MenuItemInterface;
 use App\Exceptions\General\NothingToUpdate;
-use App\Exceptions\Menu\MenuItemNotDeleted;
-use App\Exceptions\Menu\MenuItemNotStored;
-use App\Exceptions\Menu\MenuItemNotUpdated;
-use App\Exceptions\Menu\MenuNotFound;
+use App\Exceptions\Menu\{
+    MenuItemNotDeleted,
+    MenuItemNotStored,
+    MenuItemNotUpdated,
+    MenuNotFound
+};
 use App\Models\MenuItem;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

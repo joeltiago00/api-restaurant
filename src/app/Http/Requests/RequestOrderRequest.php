@@ -47,6 +47,9 @@ class RequestOrderRequest extends FormRequest
             return $this->validationCreate();
     }
 
+    /**
+     * @return array
+     */
     private function validationStore(): array
     {
         return [
@@ -56,6 +59,9 @@ class RequestOrderRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     private function validationUpdate(): array
     {
         return [
@@ -66,6 +72,9 @@ class RequestOrderRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     private function validationIndex(): array
     {
         return [
@@ -77,6 +86,9 @@ class RequestOrderRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     private function validationCreate(): array
     {
         return [

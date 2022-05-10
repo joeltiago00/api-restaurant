@@ -6,16 +6,17 @@ use App\Core\Interfaces\UserInterface;
 use App\Exceptions\General\NothingToUpdate;
 use App\Exceptions\JobFunction\JobFunctionNotFound;
 use App\Exceptions\Role\RoleNotFound;
-use App\Exceptions\User\InvalidUser;
-use App\Exceptions\User\UserNotDeleted;
-use App\Exceptions\User\UserNotStored;
-use App\Exceptions\User\UserNotUpdated;
+use App\Exceptions\User\{
+    InvalidUser,
+    UserNotDeleted,
+    UserNotStored,
+    UserNotUpdated,
+};
 use App\Models\User;
 use App\Types\JobFunctionTypes;
 use App\Types\RoleTypes;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository extends Repository
 {

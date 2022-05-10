@@ -30,6 +30,9 @@ class LoginRequest extends FormRequest
             return $this->validationLogin();
     }
 
+    /**
+     * @return array
+     */
     private function validationLogin(): array
     {
         return [

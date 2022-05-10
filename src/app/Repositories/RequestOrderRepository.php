@@ -16,8 +16,10 @@ use App\Exceptions\RequestOrder\{RequestOrderNotDeleted,
 use App\Exceptions\Table\TableNotFound;
 use App\Helpers\DateTimeHelper;
 use App\Models\RequestOrder;
-use App\Types\RequestOrderFilterTypes;
-use App\Types\RequestOrderStatusTypes;
+use App\Types\{
+    RequestOrderFilterTypes,
+    RequestOrderStatusTypes
+};
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

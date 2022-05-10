@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Core\Interfaces\CustomerInterface;
-use App\Exceptions\Customer\CustomerNotDeleted;
-use App\Exceptions\Customer\CustomerNotUpdated;
 use App\Exceptions\Custumer\CustumerNotStored;
+use App\Exceptions\Customer\{
+    CustomerNotDeleted,
+    CustomerNotUpdated
+};
 use App\Exceptions\General\NothingToUpdate;
 use App\Models\Customer;
-use App\Models\Table;
-use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CustomerRepository extends Repository

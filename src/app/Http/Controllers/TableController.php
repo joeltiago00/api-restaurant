@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\General\NothingToUpdate;
 use App\Transformers\TableTransformer;
-use App\Types\PaginationValueTypes;
 use App\Exceptions\Table\{TableNotChanged,
     TableNotCreated,
     TableNotDeleted,
