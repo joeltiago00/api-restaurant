@@ -1,4 +1,4 @@
-# Construindo container 🐋 && Configurando aplicação
+# Construindo container 🐋 && Configurando aplicação 🤖
 
 <br>
 Para construir o container acesse o terminal de sua aplicação e execute:
