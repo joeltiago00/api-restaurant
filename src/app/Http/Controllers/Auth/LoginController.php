@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Exceptions\Auth\InvalidCredentials;
+use App\Exceptions\JobFunction\JobFunctionNotFound;
 use App\Exceptions\Role\RoleNotFound;
 use App\Helpers\ResponseHelper;
 use App\Models\Role;
+use App\Repositories\JobFunctionRepository;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Exceptions\Session\{
     SessionNotStored,
@@ -35,6 +38,7 @@ class LoginController extends Controller
      * @param LoginRequest $request
      * @return JsonResponse
      * @throws InvalidCredentials
+     * @throws JobFunctionNotFound
      * @throws RoleNotFound
      * @throws SessionNotStored
      * @throws SessionNotUpdated
@@ -53,14 +57,19 @@ class LoginController extends Controller
 
         $this->repository->disableSessions($session);
 
-        if (!$role = Role::find($user->role_id))
+        if (!$role = (new RoleRepository())->getById($user->role_id))
             throw new RoleNotFound();
+
+        if (!$job = (new JobFunctionRepository())->getById($user->job_function_id))
+            throw new JobFunctionNotFound();
 
         return ResponseHelper::results([
             'user' => [
                 'id' => $user->id,
                 'name' => sprintf('%s %s', $user->first_name, $user->last_name),
                 'email' => $user->email,
+                'user_job_function_id' => $user->job_function_id,
+                'user_job_function_name' => $job->name,
                 'user_role_id' => $role->id,
                 'user_role_name' => $role->name,
                 'user_is_admin' => (new UserRepository())->isAdmin($user)

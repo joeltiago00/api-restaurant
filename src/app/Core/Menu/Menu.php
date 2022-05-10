@@ -17,9 +17,9 @@ class Menu implements MenuInterface
 
     /**
      * @param int|null $id
-     * @param string|null $name
+     * @param string $name
      */
-    public function __construct(int $id = null, string $name = null)
+    public function __construct(int $id = null, string $name = '')
     {
         $this->id = $id;
         $this->name = $name;

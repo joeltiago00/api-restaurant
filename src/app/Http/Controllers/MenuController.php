@@ -56,7 +56,7 @@ class MenuController extends Controller
      */
     public function update(MenuRequest $request, Menu $menu): JsonResponse
     {
-        if ($this->repository->update($menu, $request->name))
+        if (!$this->repository->update($menu, $request->name))
             throw new MenuNotChanged();
 
         return ResponseHelper::noContent();
@@ -69,7 +69,8 @@ class MenuController extends Controller
      */
     public function show(Menu $menu): JsonResponse
     {
-        if (!$menu = $menu->items()->get()->toArray())
+
+        if (!$menu = $this->repository->getWithItemByMenuId($menu->id)->toArray())
             throw new MenuNotGeted();
 
         return ResponseHelper::results((new MenuTransformer())->show($menu));

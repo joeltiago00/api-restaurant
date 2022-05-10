@@ -9,6 +9,10 @@ class RequestOrder implements RequestOrderInterface
     /**
      * @var int
      */
+    private int $customerId;
+    /**
+     * @var int
+     */
     private int $waiterId;
     /**
      * @var string
@@ -20,12 +24,14 @@ class RequestOrder implements RequestOrderInterface
     private int $tableId;
 
     /**
+     * @param int $customerId
      * @param int $waiterId
      * @param int $tableId
      * @param string $status
      */
-    public function __construct(int $waiterId, int $tableId, string $status)
+    public function __construct(int $customerId, int $waiterId, int $tableId, string $status)
     {
+        $this->customerId = $customerId;
         $this->waiterId = $waiterId;
         $this->status = $status;
         $this->tableId = $tableId;
@@ -53,5 +59,13 @@ class RequestOrder implements RequestOrderInterface
     public function getTableId(): int
     {
         return $this->tableId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerId(): int
+    {
+        return $this->customerId;
     }
 }

@@ -81,7 +81,7 @@ class TableController extends Controller
      */
     public function index(TableRequest $request): JsonResponse
     {
-        if (!$tables = $this->repository->getAll($request->pp ?? PaginationValueTypes::PER_PAGE_DEFAULT))
+        if (!$tables = $this->repository->getAll($request->pp))
             throw new TableNotGeted();
 
         return ResponseHelper::results((new TableTransformer())->index($tables->toArray()));

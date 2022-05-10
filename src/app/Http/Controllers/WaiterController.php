@@ -19,7 +19,7 @@ class WaiterController extends Controller
      */
     public function getRequestOrdersByWaiter(WaiterRequest $request): JsonResponse
     {
-        $orders = (new RequestOrderRepository())->getByUserAndTerm($request->user_id, $request->term, $request->pp ?? PaginationValueTypes::PER_PAGE_DEFAULT);
+        $orders = (new RequestOrderRepository())->getByUserAndTerm($request->user_id, $request->user_job_function_name,$request->term, $request->pp ?? PaginationValueTypes::PER_PAGE_DEFAULT);
 
         return ResponseHelper::results((new RequestOrderTransformer())->index($orders->toArray()));
     }

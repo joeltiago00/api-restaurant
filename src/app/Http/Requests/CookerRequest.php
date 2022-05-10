@@ -13,7 +13,7 @@ class CookerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,15 +25,15 @@ class CookerRequest extends FormRequest
     {
         $name_controller = $this->route()->action['controller'];
 
-        if (str_contains($name_controller, '@index'))
-            return $this->validationIndex();
+        if (str_contains($name_controller, '@getRequestOrdersByCooker'))
+            return $this->validationGetRequestOrdersByCooker();
     }
 
-    private function validationIndex(): array
+    private function validationGetRequestOrdersByCooker(): array
     {
         return [
-            'term' => 'sometimes|string|in:pending,preparing,finished,all',
-            'pp' => 'sometimes|numeric|min:1',
+            'term' => 'required|string|in:pending,preparing,finished,all',
+            'pp' => 'required|numeric|min:1',
             'pg' => 'sometimes|numeric|min:1|max:15',
         ];
     }

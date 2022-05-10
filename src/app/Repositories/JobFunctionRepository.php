@@ -17,7 +17,7 @@ class JobFunctionRepository extends Repository
      */
     public function getAll(): Collection
     {
-        return self::getModel()::all();
+        return JobFunction::all();
     }
 
     /**
@@ -26,7 +26,7 @@ class JobFunctionRepository extends Repository
      */
     public function exitsById(int $id): bool
     {
-        return (bool)self::getModel()::find($id);
+        return (bool)JobFunction::find($id);
     }
 
     /**
@@ -36,5 +36,14 @@ class JobFunctionRepository extends Repository
     public function getById(int $id): JobFunction
     {
         return JobFunction::find($id);
+    }
+
+    /**
+     * @param string $name
+     * @return JobFunction
+     */
+    public function getByName(string $name): JobFunction
+    {
+        return JobFunction::where('name', $name)->first();
     }
 }

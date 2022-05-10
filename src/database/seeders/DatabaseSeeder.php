@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
             JobFunctionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            MenuSeeder::class,
-            MenuItemSeeder::class,
-            TableSeeder::class
+            TableSeeder::class,
+            ApplicationSeeder::class,
         ]);
     }
 }

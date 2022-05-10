@@ -4,15 +4,13 @@ services:
     image: mysql:5.7.32
     environment:
       MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "api_restaurant_multiplier"
+      MYSQL_DATABASE: "api_restaurant_multiplier_dev"
     ports:
       - "3306:3306"
     volumes:
-      - ./.docker/mysql/data:/var/lib/mysql
+      - .docker/mysql/data:/var/lib/mysql
     networks:
       - mysql-compose-network
-    #  networks:
-    #    - tbr
   app:
     build:
       context: .

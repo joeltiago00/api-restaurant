@@ -4,8 +4,11 @@ namespace App\Transformers;
 
 class MenuTransformer
 {
-
-    public function index(array $collection)
+    /**
+     * @param array $collection
+     * @return array
+     */
+    public function index(array $collection): array
     {
         $response['pagination'] = [
             'total' => $collection['total'],
@@ -16,7 +19,9 @@ class MenuTransformer
         ];
 
         foreach ($collection['data'] as $menu) {
-            $response['menus'][] = $this->applyFormat($menu['id'], $menu['name']);
+            $items = isset($menu['items']) ? $this->setItem($menu['items']) : [];
+
+            $response['menus'][] = $this->applyFormat($menu['id'], $menu['name'], $items);
         }
 
         return $response ?? [];
@@ -28,12 +33,20 @@ class MenuTransformer
      */
     public function list(array $collection): array
     {
-        foreach ($collection as $menu) {
-            $items = $this->setItem($menu['items']);
-            $menus[] = array_merge($this->applyFormat($menu['id'], $menu['name']), $items);
+        $response['pagination'] = [
+            'total' => $collection['total'],
+            'per_page' => $collection['per_page'],
+            'page' => $collection['page'] ?? 1,
+            'next_page_url' => $collection['next_page_url'],
+            'prev_page_url' => $collection['prev_page_url']
+        ];
+
+        foreach ($collection['data'] as $menu) {
+            $items = isset($menu['items']) ? $this->setItem($menu['items']) : [];
+            $response['menus'][] = $this->applyFormat($menu['id'], $menu['name'], $items);
         }
 
-        return $menus ?? [];
+        return $response ?? [];
     }
 
     /**
@@ -42,7 +55,7 @@ class MenuTransformer
      */
     public function show(array $menu): array
     {
-        $items = $this->setItem($menu['items']);
+        $items = isset($menu['items']) ? $this->setItem($menu['items']) : [];
 
         return $this->applyFormat($menu['id'], $menu['name'], $items);
     }
@@ -50,13 +63,15 @@ class MenuTransformer
     /**
      * @param int $menu_id
      * @param string $menu_name
+     * @param array $items
      * @return array
      */
-    private function applyFormat(int $menu_id, string $menu_name): array
+    private function applyFormat(int $menu_id, string $menu_name, array $items): array
     {
         return [
             'id' => $menu_id,
             'name' => $menu_name,
+            'items' => $items
         ];
     }
 

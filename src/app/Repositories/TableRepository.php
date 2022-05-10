@@ -8,6 +8,7 @@ use App\Exceptions\Table\TableNotDeleted;
 use App\Exceptions\Table\TableNotStored;
 use App\Exceptions\Table\TableNotUpdated;
 use App\Models\Table;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class TableRepository extends Repository
 {
@@ -24,7 +25,7 @@ class TableRepository extends Repository
     public function store(TableInterface $table): Table
     {
         try {
-            return self::getModel()::create([
+            return Table::create([
                 'number' => $table->getNumber(),
                 'quantity_seats' => $table->getQuantitySeats()
             ]);
@@ -57,11 +58,11 @@ class TableRepository extends Repository
 
     /**
      * @param int $pp
-     * @return mixed
+     * @return LengthAwarePaginator
      */
-    public function getAll(int $pp)
+    public function getAll(int $pp): LengthAwarePaginator
     {
-        return self::getModel()::paginate($pp);
+        return Table::paginate($pp);
     }
 
     /**

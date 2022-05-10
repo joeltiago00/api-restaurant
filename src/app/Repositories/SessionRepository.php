@@ -47,7 +47,7 @@ class SessionRepository extends Repository
     public function disableSessions(Session $session)
     {
         try {
-            self::getModel()::where('id', '<>', $session->id)
+            Session::where('id', '<>', $session->id)
                 ->where('user_id', $session->user_id)
                 ->where('status', SessionStatusTypes::ACTIVE)
                 ->update([
@@ -82,7 +82,7 @@ class SessionRepository extends Repository
      */
     public function getSessionByAuthSecureToken(string $auth_secure_token): Session
     {
-        return self::getModel()::where('auth_secure_token', $auth_secure_token)
+        return Session::where('auth_secure_token', $auth_secure_token)
             ->where('status', 'active')
             ->where('expired_at', '>', Carbon::now()->format('Y-m-d H:i:s'))
             ->first();

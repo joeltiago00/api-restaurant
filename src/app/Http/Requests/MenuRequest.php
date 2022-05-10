@@ -32,7 +32,7 @@ class MenuRequest extends FormRequest
             return $this->validationUpdate();
 
         if (str_contains($name_controller, '@index'))
-            return [];
+            return $this->validationIndex();
     }
 
     private function validationStore(): array
@@ -41,12 +41,17 @@ class MenuRequest extends FormRequest
             'name' => 'required|string|min:3',
         ];
     }
+    private function validationIndex(): array
+    {
+        return [
+            'pp' => 'required|numeric|min:1',
+        ];
+    }
 
     private function validationUpdate(): array
     {
         return [
-            'name' => 'sometimes|string|min:3',
-
+            'name' => 'sometimes|string',
         ];
     }
 }

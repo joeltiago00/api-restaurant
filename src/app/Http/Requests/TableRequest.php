@@ -32,7 +32,7 @@ class TableRequest extends FormRequest
             return $this->validationUpdate();
 
         if (str_contains($name_controller, '@index'))
-            return [];
+            return $this->validationIndex();
     }
 
     private function validationStore(): array
@@ -48,6 +48,16 @@ class TableRequest extends FormRequest
         return [
             'number' => 'sometimes|numeric|min:1',
             'quantity_seats' => 'sometimes|numeric|min:1',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function validationIndex(): array
+    {
+        return [
+            'pp' => 'required|numeric|min:1',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -15,7 +16,7 @@ class RequestOrder extends Model
     protected $table = 'request_orders';
 
     protected $fillable = [
-        'waiter_id', 'cooker_id', 'status', 'price', 'started_at', 'finished_at', 'opened_at', 'table_id'
+        'waiter_id', 'cooker_id', 'status', 'price', 'started_at', 'finished_at', 'opened_at', 'table_id', 'customer_id'
     ];
 
     /**
@@ -47,5 +48,29 @@ class RequestOrder extends Model
     public function waiter(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'waiter_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function cooker(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'cooker_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function table(): HasOne
+    {
+        return $this->hasOne(Table::class, 'id', 'table_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function customer(): HasOne
+    {
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
     }
 }

@@ -4,14 +4,22 @@ namespace App\Repositories;
 
 use App\Core\Interfaces\RequestOrderInterface;
 use App\Exceptions\Access\NotAllowed;
-use App\Exceptions\RequestOrder\{RequestOrderNotGeted,
+use App\Exceptions\Custumer\InvalidCustomer;
+use App\Exceptions\General\NothingToUpdate;
+use App\Exceptions\JobFunction\JobFunctionNotFound;
+use App\Types\JobFunctionTypes;
+use App\Exceptions\RequestOrder\{RequestOrderNotDeleted,
+    RequestOrderNotGeted,
     RequestOrderNotStored,
     RequestOrderNotUpdated,
     RequestOrderPriceNotUpdated};
 use App\Exceptions\Table\TableNotFound;
+use App\Helpers\DateTimeHelper;
 use App\Models\RequestOrder;
+use App\Types\RequestOrderFilterTypes;
 use App\Types\RequestOrderStatusTypes;
 use Carbon\Carbon;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class RequestOrderRepository extends Repository
 {
@@ -21,24 +29,84 @@ class RequestOrderRepository extends Repository
     }
 
     /**
-     * @param RequestOrderInterface $order
+     * @param RequestOrderInterface $requestOrder
      * @return RequestOrder
+     * @throws InvalidCustomer
+     * @throws NotAllowed
      * @throws RequestOrderNotStored
      * @throws TableNotFound
+     * @throws JobFunctionNotFound
      */
-    public function store(RequestOrderInterface $order): RequestOrder
+    public function store(RequestOrderInterface $requestOrder): RequestOrder
     {
-        if (!(new TableRepository())->existsById($order->getTableId()))
+        if (!(new TableRepository())->existsById($requestOrder->getTableId()))
             throw new TableNotFound();
+
+        if (!(new CustomerRepository())->existsById($requestOrder->getCustomerId()))
+            throw new InvalidCustomer();
+
+        if (!(new UserRepository())->isWaiter($requestOrder->getWaiterId()))
+            throw new NotAllowed();
 
         try {
             return RequestOrder::create([
-                'waiter_id' => $order->getWaiterId(),
-                'status' => $order->getStatus(),
-                'table_id' => $order->getTableId()
+                'waiter_id' => $requestOrder->getWaiterId(),
+                'status' => $requestOrder->getStatus(),
+                'table_id' => $requestOrder->getTableId(),
+                'customer_id' => $requestOrder->getCustomerId(),
             ]);
         } catch (\Exception $e) {
             throw new RequestOrderNotStored($e);
+        }
+    }
+
+    /**
+     * @param RequestOrder $requestOrder
+     * @param array $data
+     * @return bool
+     * @throws InvalidCustomer
+     * @throws JobFunctionNotFound
+     * @throws NotAllowed
+     * @throws NothingToUpdate
+     * @throws RequestOrderNotUpdated
+     */
+    public function update(RequestOrder $requestOrder, array $data): bool
+    {
+        if (empty($data))
+            throw new NothingToUpdate();
+
+        if (isset($data['waiter_id']) ?? !(new UserRepository())->isWaiter($data['waiter_id']))
+            throw new NotAllowed();
+
+        if (isset($data['cooker_id']) ?? !(new UserRepository())->isWaiter($data['cooker_id']))
+            throw new NotAllowed();
+
+        if (isset($data['customer_id']) ?? !(new CustomerRepository())->existsById($data['customer_id']))
+            throw new InvalidCustomer();
+
+        try {
+            return $requestOrder->update([
+                'waiter_id' => $data['customer_id'] ?? $requestOrder->customer_id,
+                'cooker_id' => $data['cooker_id'] ?? $requestOrder->cooker_id,
+                'table_id' => $data['table_id'] ?? $requestOrder->table_id,
+                'customer_id' => $data['customer_id'] ?? $requestOrder->customer_id,
+            ]);
+        } catch (\Exception $e) {
+            throw new RequestOrderNotUpdated($e);
+        }
+    }
+
+    /**
+     * @param RequestOrder $requestOrder
+     * @return bool
+     * @throws RequestOrderNotDeleted
+     */
+    public function delete(RequestOrder $requestOrder): bool
+    {
+        try {
+            return (bool)$requestOrder->delete();
+        } catch (\Exception $e) {
+            throw new RequestOrderNotDeleted($e);
         }
     }
 
@@ -127,23 +195,119 @@ class RequestOrderRepository extends Repository
 
     /**
      * @param int $user_id
+     * @param string $user_type
      * @param string $term
      * @param int $pp
-     * @return mixed
+     * @return LengthAwarePaginator
      * @throws RequestOrderNotGeted
      */
-    public function getByUserAndTerm(int $user_id, string $term, int $pp)
+    public function getByUserAndTerm(int $user_id, string $user_type, string $term, int $pp): LengthAwarePaginator
     {
         try {
-            return self::getModel()::with('items', 'waiter')
+            return RequestOrder::with('items', 'customer', 'table', 'cooker', 'waiter')
                 ->when($term === RequestOrderStatusTypes::PENDING, function ($query) use ($term) {
                     return $query->where('request_orders.status', $term);
                 })->when($term === RequestOrderStatusTypes::PREPARING, function ($query) use ($term) {
                     return $query->where('request_orders.status', $term);
                 })->when($term === RequestOrderStatusTypes::FINISHED, function ($query) use ($term) {
                     return $query->where('request_orders.status', $term);
-                })->where('waiter_id', $user_id)
+                })->when($user_type === JobFunctionTypes::WAITER, function ($query) use ($user_id) {
+                     return $query->where('waiter_id', $user_id);
+                })->when($user_type === JobFunctionTypes::COOKER, function ($query) use ($user_id) {
+                    return $query->where('cooker_id', $user_id);
+                })
                 ->paginate($pp);
+        } catch (\Exception $e) {
+            throw new RequestOrderNotGeted($e);
+        }
+    }
+
+    /**
+     * @param string $filter_type
+     * @param $filter_value
+     * @param string $term
+     * @param int $pp
+     * @return LengthAwarePaginator
+     * @throws RequestOrderNotGeted
+     */
+    public function getByFilter(string $filter_type, $filter_value, string $term, int $pp): LengthAwarePaginator
+    {
+        try {
+            return RequestOrder::with('items', 'customer', 'table', 'cooker', 'waiter')
+                ->when($filter_type === RequestOrderFilterTypes::DAY, function ($query) use ($filter_value) {
+                    return $query->where('created_at', Carbon::parse($filter_value));
+                })->when($filter_type === RequestOrderFilterTypes::WEEK, function ($query) {
+                    return $query->where('created_at', '>=', DateTimeHelper::getFirstDayOfWeek())
+                        ->where('created_at', '<=', DateTimeHelper::getLastDayOfWeek());
+                })->when($filter_type === RequestOrderFilterTypes::MONTH, function ($query) {
+                    return $query->where('created_at', '>=', Carbon::now()->startOfMonth())
+                        ->where('created_at', '<=', Carbon::now()->endOfMonth());
+                })->when($filter_type === RequestOrderFilterTypes::RANGE_DATE, function ($query) use ($filter_value) {
+                    return $query->where('created_at', '>=', Carbon::parse($filter_value['begin']))
+                        ->where('created_at', '<=', Carbon::parse($filter_value['finish']));
+                })->when($filter_type === RequestOrderFilterTypes::BY_TABLE, function ($query) use ($filter_value) {
+                    return $query->where('table_id', (int)$filter_value);
+                })->when($filter_type === RequestOrderFilterTypes::BY_CLIENT, function ($query) use ($filter_value) {
+                    return $query->where('costumer_id', (int)$filter_value);
+                })->when($term === RequestOrderStatusTypes::PENDING, function ($query) {
+                    return $query->where('status', RequestOrderStatusTypes::PENDING);
+                })->when($term === RequestOrderStatusTypes::PREPARING, function ($query) {
+                    return $query->where('status', RequestOrderStatusTypes::PREPARING);
+                })->when($term === RequestOrderStatusTypes::FINISHED, function ($query) {
+                    return $query->where('status', RequestOrderStatusTypes::FINISHED);
+                })->paginate($pp);
+        } catch (\Exception $e) {
+            throw new RequestOrderNotGeted($e);
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws RequestOrderNotGeted
+     */
+    public function getGreaterByCustomerId(int $id): array
+    {
+        try {
+            return RequestOrder::with('items', 'customer', 'table', 'cooker', 'waiter')
+                ->where('customer_id', $id)
+                ->orderBy('price', 'desc')
+                ->first()->toArray();
+        } catch (\Exception $e) {
+            throw new RequestOrderNotGeted($e);
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws RequestOrderNotGeted
+     */
+    public function getLessByCustomertId(int $id): array
+    {
+        try {
+            return RequestOrder::with('items', 'customer', 'table', 'cooker', 'waiter')
+                ->where('customer_id', $id)
+                ->orderBy('price', 'asc')
+                ->first()->toArray();
+        } catch (\Exception $e) {
+            throw new RequestOrderNotGeted($e);
+        }
+
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws RequestOrderNotGeted
+     */
+    public function getFirstByCustomerId(int $id): array
+    {
+        try {
+            return RequestOrder::with('items', 'customer', 'table', 'cooker', 'waiter')
+                ->where('customer_id', $id)
+                ->orderBy('created_at', 'asc')
+                ->first()->toArray();
         } catch (\Exception $e) {
             throw new RequestOrderNotGeted($e);
         }

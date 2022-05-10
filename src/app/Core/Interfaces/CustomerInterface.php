@@ -2,7 +2,7 @@
 
 namespace App\Core\Interfaces;
 
-interface CostumerInterface
+interface CustomerInterface
 {
     public function getFisrtName(): string;
 

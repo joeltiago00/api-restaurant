@@ -27,6 +27,12 @@ class UserRequest extends FormRequest
 
         if (str_contains($name_controller, '@store'))
             return $this->validationStore();
+
+        if (str_contains($name_controller, '@update'))
+            return $this->validationUpdate();
+
+        if (str_contains($name_controller, '@index'))
+            return $this->validationIndex();
     }
 
     /**
@@ -43,6 +49,27 @@ class UserRequest extends FormRequest
             'password' => 'required|string|min:8|max:16',
             'job_function_id' => 'required|numeric|min:1',
             'role_id' => 'required|numeric|min:1'
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function validationUpdate(): array
+    {
+        return [
+            'first_name' => 'sometimes|string|min:3|max:20',
+            'last_name' => 'sometimes|string|min:3|max: 60',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function validationIndex(): array
+    {
+        return [
+            'pp' => 'required|numeric|min:1',
         ];
     }
 }

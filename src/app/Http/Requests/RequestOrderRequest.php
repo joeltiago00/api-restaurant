@@ -28,6 +28,9 @@ class RequestOrderRequest extends FormRequest
         if (str_contains($name_controller, '@store'))
             return $this->validationStore();
 
+        if (str_contains($name_controller, '@update'))
+            return $this->validationUpdate();
+
         if (str_contains($name_controller, '@setCooker'))
             return [];
 
@@ -36,22 +39,48 @@ class RequestOrderRequest extends FormRequest
 
         if (str_contains($name_controller, '@finish'))
             return [];
+
+        if (str_contains($name_controller, '@index'))
+            return $this->validationIndex();
+
+        if (str_contains($name_controller, '@create'))
+            return $this->validationCreate();
     }
 
     private function validationStore(): array
     {
         return [
             'items' => 'required|array',
-            'table_id' => 'required|numeric|min:1'
+            'table_id' => 'required|numeric|min:1',
+            'customer_id' => 'required|numeric|min:1',
+        ];
+    }
+
+    private function validationUpdate(): array
+    {
+        return [
+            'items' => 'sometimes|array',
+            'table_id' => 'sometimes|numeric',
+            'cooker_id' => 'sometimes|numeric',
+            'costumer_id' => 'sometimes|numeric',
         ];
     }
 
     private function validationIndex(): array
     {
         return [
-            'term' => 'sometimes|string|in:pending,preparing,finished,all',
-            'pp' => 'sometimes|numeric|min:1',
+            'term' => 'required|string|in:pending,preparing,finished,all',
+            'filter_type' => 'required|string:day,week,month,by_table,by_client',
+            'filter_value' => 'sometimes',
+            'pp' => 'required|numeric|min:1',
             'pg' => 'sometimes|numeric|min:1|max:15',
+        ];
+    }
+
+    private function validationCreate(): array
+    {
+        return [
+            'pp' => 'required|numeric|min:1',
         ];
     }
 }

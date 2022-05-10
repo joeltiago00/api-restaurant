@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\Login\LoginInvalidSessionException;
+use App\Exceptions\JobFunction\JobFunctionNotFound;
+use App\Exceptions\Role\RoleNotFound;
 use App\Exceptions\Session\InvalidSession;
 use App\Exceptions\User\InvalidUser;
-use App\Exceptions\User\UserInvalidException;
 use App\Models\Session;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
@@ -16,10 +16,14 @@ use Illuminate\Support\Facades\Validator;
 class Authenticate extends Middleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * @param $request
+     * @param \Closure $next
+     * @param ...$guards
+     * @return \Illuminate\Http\JsonResponse|mixed
+     * @throws InvalidSession
+     * @throws InvalidUser
+     * @throws JobFunctionNotFound
+     * @throws RoleNotFound
      */
     public function handle($request, \Closure $next, ...$guards)
     {
@@ -35,27 +39,30 @@ class Authenticate extends Middleware
             return \response()->json(['errors' => $validation->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $session = Session::where('auth_secure_token', $token)
+        if (!$session = Session::where('auth_secure_token', $token)
             ->where('status', 'active')
             ->where('expired_at', '>', Carbon::now()->format('Y-m-d H:i:s'))
-            ->first();
-
-        if (!$session) {
+            ->first())
             throw new InvalidSession();
-        }
 
-        $user = $session->user()->first();
 
-        if (!$user)
+        if (!$user = $session->user()->first())
             throw new InvalidUser();
 
+        if (!$role = $user->role()->first())
+            throw new RoleNotFound();
+
+        if (!$job = $user->jobFunction()->first())
+            throw new JobFunctionNotFound();
 
         $request->merge([
             'user_id' => $user->id,
             'user_name' => $user->name,
             'user_email' => $user->email,
-            'user_job_function' => $user->job_function_id,
+            'user_job_function_id' => $user->job_function_id,
+            'user_job_function_name' => $job->name,
             'user_role_id' => $user->role_id,
+            'user_role_name' => $role->name,
             'user_is_admin' => (new UserRepository())->isAdmin($user),
             'session_id' => $session->id
         ]);

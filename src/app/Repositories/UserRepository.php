@@ -3,13 +3,19 @@
 namespace App\Repositories;
 
 use App\Core\Interfaces\UserInterface;
+use App\Exceptions\General\NothingToUpdate;
 use App\Exceptions\JobFunction\JobFunctionNotFound;
 use App\Exceptions\Role\RoleNotFound;
+use App\Exceptions\User\InvalidUser;
+use App\Exceptions\User\UserNotDeleted;
 use App\Exceptions\User\UserNotStored;
+use App\Exceptions\User\UserNotUpdated;
 use App\Models\User;
 use App\Types\JobFunctionTypes;
 use App\Types\RoleTypes;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository extends Repository
 {
@@ -51,39 +57,93 @@ class UserRepository extends Repository
 
     /**
      * @param User $user
+     * @param array $data
+     * @return bool
+     * @throws NothingToUpdate
+     * @throws UserNotUpdated
+     */
+    public function update(User $user, array $data): bool
+    {
+        if (empty($data))
+            throw new NothingToUpdate();
+
+        try {
+            return $user->update([
+                'first_name' => $data['first_name'] ?? $user->first_name,
+                'last_name' => $data['last_name'] ?? $user->last_name,
+            ]);
+        } catch (Exception $e) {
+            throw new UserNotUpdated($e);
+        }
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     * @throws UserNotDeleted
+     */
+    public function delete(User $user): bool
+    {
+        try {
+            return (bool)$user->delete();
+        } catch (Exception $e) {
+            throw new UserNotDeleted($e);
+        }
+    }
+
+    /**
+     * @param $user
      * @return bool
      * @throws RoleNotFound
      */
-    public function isAdmin(User $user): bool
+    public function isAdmin($user): bool
     {
-        if (!$role = (new RoleRepository())->getById($user->role_id))
-            throw new RoleNotFound();
+        if ($user instanceof User) {
+            if (!$role = (new RoleRepository())->getById($user->role_id))
+                throw new RoleNotFound();
+        } else {
+            if (!$role = (new RoleRepository())->getById((int)$user))
+                throw new RoleNotFound();
+        }
 
         return $role->name === RoleTypes::ADMIN;
     }
 
     /**
-     * @param User $user
+     * @param $user
      * @return bool
      * @throws JobFunctionNotFound
      */
-    public function isWaiter(User $user): bool
+    public function isWaiter($user): bool
     {
-        if (!$job_function = (new JobFunctionRepository())->getById($user->job_function_id))
-            throw new JobFunctionNotFound();
+        if ($user instanceof User) {
+            if (!$job_function = (new JobFunctionRepository())->getById($user->job_function_id))
+                throw new JobFunctionNotFound();
+        } else {
+            if (!$user = $this->getById((int)$user))
+            throw new InvalidUser();
+
+            if (!$job_function = (new JobFunctionRepository())->getById($user->job_function_id))
+                throw new JobFunctionNotFound();
+        }
 
         return $job_function->name === JobFunctionTypes::WAITER;
     }
 
     /**
-     * @param User $user
+     * @param $user
      * @return bool
      * @throws JobFunctionNotFound
      */
-    public function isCooker(User $user): bool
+    public function isCooker($user): bool
     {
-        if (!$job_function = (new JobFunctionRepository())->getById($user->job_function_id))
-            throw new JobFunctionNotFound();
+        if ($user instanceof User) {
+            if (!$job_function = (new JobFunctionRepository())->getById($user->job_function_id))
+                throw new JobFunctionNotFound();
+        } else {
+            if (!$job_function = (new JobFunctionRepository())->getById((int)$user))
+                throw new JobFunctionNotFound();
+        }
 
         return $job_function->name === JobFunctionTypes::COOKER;
     }
@@ -94,6 +154,15 @@ class UserRepository extends Repository
      */
     public function getById(int $id): User
     {
-        return self::getModel()::find($id);
+        return User::find($id);
+    }
+
+    /**
+     * @param int $pp
+     * @return LengthAwarePaginator
+     */
+    public function getAll(int $pp): LengthAwarePaginator
+    {
+        return User::paginate($pp);
     }
 }

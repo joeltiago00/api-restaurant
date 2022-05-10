@@ -2,10 +2,10 @@
 
 namespace App\Core\Person;
 
-use App\Core\Interfaces\CostumerInterface;
+use App\Core\Interfaces\CustomerInterface;
 use App\Core\Interfaces\DocumentInterface;
 
-class Costumer implements  CostumerInterface
+class Custumer implements  CustomerInterface
 {
     /**
      * @var string

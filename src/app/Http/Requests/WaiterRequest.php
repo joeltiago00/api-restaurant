@@ -25,15 +25,15 @@ class WaiterRequest extends FormRequest
     {
         $name_controller = $this->route()->action['controller'];
 
-        if (str_contains($name_controller, '@index'))
-            return $this->validationIndex();
+        if (str_contains($name_controller, '@getRequestOrdersByWaiter'))
+            return $this->validationGetRequestOrdersByWaiter();
     }
 
-    private function validationIndex(): array
+    private function validationGetRequestOrdersByWaiter(): array
     {
         return [
-            'term' => 'sometimes|string|in:pending,preparing,finished,all',
-            'pp' => 'sometimes|numeric|min:1',
+            'term' => 'required|string|in:pending,preparing,finished,all',
+            'pp' => 'required|numeric|min:1',
             'pg' => 'sometimes|numeric|min:1|max:15',
         ];
     }

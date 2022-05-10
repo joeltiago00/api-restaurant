@@ -17,7 +17,7 @@ class RoleRepository extends Repository
      */
     public function getAll(): Collection
     {
-        return self::getModel()::all();
+        return Role::all();
     }
 
     /**
@@ -26,7 +26,7 @@ class RoleRepository extends Repository
      */
     public function getById(int $id): Role
     {
-        return self::getModel()::find($id);
+        return Role::find($id);
     }
 
     /**
@@ -35,6 +35,6 @@ class RoleRepository extends Repository
      */
     public function exitsById(int $id): bool
     {
-        return (bool)self::getModel()::find($id);
+        return (bool)Role::find($id);
     }
 }

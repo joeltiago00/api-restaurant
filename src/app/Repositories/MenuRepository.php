@@ -7,6 +7,7 @@ use App\Exceptions\Menu\MenuNotDeleted;
 use App\Exceptions\Menu\MenuNotStored;
 use App\Exceptions\Menu\MenuNotUpdated;
 use App\Models\Menu;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 class MenuRepository extends Repository
@@ -24,7 +25,7 @@ class MenuRepository extends Repository
     public function store(MenuInterface $menu): Menu
     {
         try {
-            return self::getModel()::create([
+            return Menu::create([
                 'name' => $menu->getName()
             ]);
         } catch (\Exception $e) {
@@ -69,23 +70,33 @@ class MenuRepository extends Repository
      */
     public function existsById(int $id): bool
     {
-        return (bool)self::getModel()::find($id);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getAllWithItems(): Collection
-    {
-        return self::getModel()::with('items')->get();
+        return (bool)Menu::find($id);
     }
 
     /**
      * @param int $pp
-     * @return mixed
+     * @return LengthAwarePaginator
      */
-    public function getAll(int $pp)
+    public function getAllWithItems(int $pp): LengthAwarePaginator
     {
-        return self::getModel()::paginate($pp);
+        return Menu::with('items')->paginate($pp);
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getWithItemByMenuId(int $id)
+    {
+        return Menu::with('items')->where('id', $id)->first();
+    }
+
+    /**
+     * @param int $pp
+     * @return LengthAwarePaginator
+     */
+    public function getAll(int $pp): LengthAwarePaginator
+    {
+        return Menu::with('items')->paginate($pp);
     }
 }
