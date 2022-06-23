@@ -21,7 +21,7 @@ class ApplicationSeeder extends Seeder
     {
         $faker = Factory::create('pt_BR');
 
-        for ($i = 0; $i <= 10000; $i++) {
+        for ($i = 0; $i <= 100; $i++) {
             Customer::create([
                 'first_name' => $faker->name,
                 'last_name' => $faker->name,
@@ -36,7 +36,7 @@ class ApplicationSeeder extends Seeder
                 'name' => $faker->name
             ]);
 
-            for ($i = 0; $i <= 10; $i++) {
+            for ($j = 0; $j <= 10; $j++) {
                 MenuItem::create([
                     'menu_id' => $menu->id,
                     'name' => $faker->name,
@@ -45,7 +45,7 @@ class ApplicationSeeder extends Seeder
             }
         }
 
-        for ($i = 0; $i <= 200000; $i++) {
+        for ($i = 0; $i <= 200; $i++) {
             $order = RequestOrder::create([
                 'customer_id' => $faker->numberBetween(1, 10000),
                 'waiter_id' => $faker->numberBetween(1, 5),
@@ -57,7 +57,7 @@ class ApplicationSeeder extends Seeder
                 'started_at' => $faker->dateTimeThisMonth(),
             ]);
 
-            for ($i = 0; $i <= 5; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 RequestOrderItem::create([
                     'request_order_id' => $order->id,
                     'menu_id' => $faker->numberBetween(1, 50),
@@ -66,7 +66,7 @@ class ApplicationSeeder extends Seeder
             }
         }
 
-        for ($i = 0; $i <= 100000; $i++) {
+        for ($i = 0; $i <= 200; $i++) {
             $order = RequestOrder::create([
                 'customer_id' => $faker->numberBetween(1, 10000),
                 'waiter_id' => $faker->numberBetween(1, 5),
@@ -76,7 +76,7 @@ class ApplicationSeeder extends Seeder
                 'price' => $faker->randomFloat(2, 100000, 400000),
             ]);
 
-            for ($i = 0; $i <= 5; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 RequestOrderItem::create([
                     'request_order_id' => $order->id,
                     'menu_id' => $faker->numberBetween(1, 50),
@@ -85,7 +85,7 @@ class ApplicationSeeder extends Seeder
             }
         }
 
-        for ($i = 0; $i <= 50000; $i++) {
+        for ($i = 0; $i <= 100; $i++) {
             $order = RequestOrder::create([
                 'customer_id' => $faker->numberBetween(1, 10000),
                 'waiter_id' => $faker->numberBetween(1, 5),
@@ -96,7 +96,7 @@ class ApplicationSeeder extends Seeder
                 'started_at' => $faker->dateTimeThisMonth(),
             ]);
 
-            for ($i = 0; $i <= 5; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 RequestOrderItem::create([
                     'request_order_id' => $order->id,
                     'menu_id' => $faker->numberBetween(1, 50),
@@ -105,7 +105,7 @@ class ApplicationSeeder extends Seeder
             }
         }
 
-        for ($i = 0; $i <= 50000; $i++) {
+        for ($i = 0; $i <= 100; $i++) {
             $order = RequestOrder::create([
                 'customer_id' => $faker->numberBetween(1, 10000),
                 'waiter_id' => $faker->numberBetween(1, 5),
@@ -115,7 +115,7 @@ class ApplicationSeeder extends Seeder
                 'price' => $faker->randomFloat(2, 100000, 400000),
             ]);
 
-            for ($i = 0; $i <= 5; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 RequestOrderItem::create([
                     'request_order_id' => $order->id,
                     'menu_id' => $faker->numberBetween(1, 50),

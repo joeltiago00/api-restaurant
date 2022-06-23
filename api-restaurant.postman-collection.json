@@ -1,0 +1,1879 @@
+{
+	"info": {
+		"_postman_id": "f4d38a04-d9e3-468a-8442-7869f0b886b2",
+		"name": "retaurant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "User",
+							"item": [
+								{
+									"name": "Create",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/user/create",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"user",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Store",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Vitor",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "José",
+													"type": "text"
+												},
+												{
+													"key": "document[type]",
+													"value": "cpf",
+													"type": "text"
+												},
+												{
+													"key": "document[value]",
+													"value": "12345678910",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "joel.a@mail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "321321321",
+													"type": "text"
+												},
+												{
+													"key": "job_function_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "role_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/user",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Index",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Vitor",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "José",
+													"type": "text"
+												},
+												{
+													"key": "document[type]",
+													"value": "cpf",
+													"type": "text"
+												},
+												{
+													"key": "document[value]",
+													"value": "12345678910",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "joel.a@mail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "321321321",
+													"type": "text"
+												},
+												{
+													"key": "job_function_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/user?pp=10",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"user"
+											],
+											"query": [
+												{
+													"key": "pp",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Show",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Vitor",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "José",
+													"type": "text"
+												},
+												{
+													"key": "document[type]",
+													"value": "cpf",
+													"type": "text"
+												},
+												{
+													"key": "document[value]",
+													"value": "12345678910",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "joel.a@mail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "321321321",
+													"type": "text"
+												},
+												{
+													"key": "job_function_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/user/1",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"user",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Vitor",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "José",
+													"type": "text"
+												},
+												{
+													"key": "document[type]",
+													"value": "cpf",
+													"type": "text"
+												},
+												{
+													"key": "document[value]",
+													"value": "12345678910",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "joel.a@mail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "321321321",
+													"type": "text"
+												},
+												{
+													"key": "job_function_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/user/2",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"user",
+												"2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Vitor",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "José",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/user/1",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"user",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Customer",
+							"item": [
+								{
+									"name": "Index",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"pm.environment.set('Auth-Secure-token', response.session.auth_secure_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"joel.tiago@email.com\",\r\n    \"password\": \"123123123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/customer?pp=10",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"customer"
+											],
+											"query": [
+												{
+													"key": "pp",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Show",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"pm.environment.set('Auth-Secure-token', response.session.auth_secure_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"joel.tiago@email.com\",\r\n    \"password\": \"123123123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/customer/1",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"customer",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"pm.environment.set('Auth-Secure-token', response.session.auth_secure_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Tiago",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "Alves",
+													"type": "text"
+												},
+												{
+													"key": "document_value",
+													"value": "1234567898",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "tiago.a@email.com",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/customer/2",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"customer",
+												"2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"pm.environment.set('Auth-Secure-token', response.session.auth_secure_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "Tiago",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "Alves",
+													"type": "text"
+												},
+												{
+													"key": "document_value",
+													"value": "1234567898",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "tiago.a@email.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/customer/2",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"customer",
+												"2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Table",
+							"item": [
+								{
+									"name": "Index",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/table?pp=10",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"table"
+											],
+											"query": [
+												{
+													"key": "pp",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Store",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "number",
+													"value": "5",
+													"type": "text"
+												},
+												{
+													"key": "quantity_seats",
+													"value": "8",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/table",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"table"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "number",
+													"value": "5",
+													"type": "text"
+												},
+												{
+													"key": "quantity_seats",
+													"value": "9",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/table/8",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"table",
+												"8"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Show",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/table/8",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"table",
+												"8"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/table/8",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"table",
+												"8"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Menu",
+							"item": [
+								{
+									"name": "Store",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "Carne",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/menu",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"menu"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "Peixes",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/menu/1",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"menu",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "Peixes",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/menu/6",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"menu",
+												"6"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Item Menu",
+							"item": [
+								{
+									"name": "Store",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "menu_id",
+													"value": "4",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "Skol",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "3500",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/item-menu",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"item-menu"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "menu_id",
+													"value": "4",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "Suco de Limão",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "3500",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/item-menu/7",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"item-menu",
+												"7"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Show",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/item-menu/7",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"item-menu",
+												"7"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "pp",
+													"value": "10",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/item-menu/7",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"item-menu",
+												"7"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Index",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "pp",
+													"value": "10",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/admin/item-menu/i?pp=10",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"admin",
+												"item-menu",
+												"i"
+											],
+											"query": [
+												{
+													"key": "pp",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Cooker",
+							"item": [
+								{
+									"name": "Start Request Order",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/cooker/request-order/6/start",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"cooker",
+												"request-order",
+												"6",
+												"start"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Finish Request Order",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/cooker/request-order/2/finish",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"cooker",
+												"request-order",
+												"2",
+												"finish"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Set Cooker",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/cooker/request-order/5/set-cooker",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"cooker",
+												"request-order",
+												"5",
+												"set-cooker"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Request Orders By Term",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/cooker/request-order?term=preparing&pp=10&pg=10",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"cooker",
+												"request-order"
+											],
+											"query": [
+												{
+													"key": "term",
+													"value": "preparing",
+													"description": "sometimes|string|in:all,peding,preparing,finished"
+												},
+												{
+													"key": "pp",
+													"value": "10",
+													"description": "sometimes|numeric|min:1"
+												},
+												{
+													"key": "pg",
+													"value": "10",
+													"description": "sometimes|numeric|min:1|max:15"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Waiter",
+							"item": [
+								{
+									"name": "Get Request Orders By Term",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "term",
+													"value": "all",
+													"type": "text"
+												},
+												{
+													"key": "filter_type",
+													"value": "day",
+													"type": "text"
+												},
+												{
+													"key": "filter_value",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "pp",
+													"value": "10",
+													"type": "text"
+												},
+												{
+													"key": "pg",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/waiter/request-order?",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"waiter",
+												"request-order"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Store",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "table_id",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "customer_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "items[0][menu_id]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "items[0][item_id]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "items[1][menu_id]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "items[1][item_id]",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "items[2][menu_id]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "items[2][item_id]",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "items[3][menu_id]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "items[3][item_id]",
+													"value": "2",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/waiter/request-order",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"waiter",
+												"request-order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Request Order",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Auth-Secure-Token",
+												"value": "{{Auth-Secure-token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{domain}}:{{port}}/api/waiter/request-order/create?pp=10",
+											"host": [
+												"{{domain}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"waiter",
+												"request-order",
+												"create"
+											],
+											"query": [
+												{
+													"key": "pp",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Request Order",
+					"item": [
+						{
+							"name": "Get First, Greater and Less Request Order By Customer",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth-Secure-Token",
+										"value": "{{Auth-Secure-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{domain}}:{{port}}/api/request-order/get-first-greater-less/1",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"request-order",
+										"get-first-greater-less",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth-Secure-Token",
+										"value": "{{Auth-Secure-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{domain}}:{{port}}/api/request-order/1",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"request-order",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Auth-Secure-Token",
+										"value": "{{Auth-Secure-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "customer_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "waiter_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "cooker_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "table_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}:{{port}}/api/request-order/1",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"request-order",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Auth-Secure-Token",
+										"value": "{{Auth-Secure-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{domain}}:{{port}}/api/request-order/1",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"request-order",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Menu",
+					"item": [
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth-Secure-Token",
+										"value": "{{Auth-Secure-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{domain}}:{{port}}/api/menu/4",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"menu",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth-Secure-Token",
+										"value": "{{Auth-Secure-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{domain}}:{{port}}/api/menu?pp=10",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"menu"
+									],
+									"query": [
+										{
+											"key": "pp",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"pm.environment.set('Auth-Secure-token', response.session.auth_secure_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joel.tiago@email.com\",\r\n    \"password\": \"123123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{port}}/api/login",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"pm.environment.set('Auth-Secure-token', response.session.auth_secure_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Auth-Secure-Token",
+								"value": "{{Auth-Secure-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joel.tiago@email.com\",\r\n    \"password\": \"123123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{port}}/api/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Costumer",
+			"item": [
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "Joel",
+									"description": "required|string|min:3|max:20",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Almeida",
+									"description": "required|string|min:3|max:60",
+									"type": "text"
+								},
+								{
+									"key": "document[type]",
+									"value": "cpf",
+									"description": "required|string|in:cpf",
+									"type": "text"
+								},
+								{
+									"key": "document[value]",
+									"value": "73663567001",
+									"description": "required|string|min:11|max:11",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "joeltiago00745@gmail.com",
+									"description": "required|unique",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}:{{port}}/api/costumer",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"costumer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
